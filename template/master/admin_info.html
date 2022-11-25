@@ -1,0 +1,379 @@
+{% include 'master/cabecera_master.html' %}
+<br>
+<div class="container">
+  <div class="card">
+    <div class="card-header" style="background-color:rgb(29, 50, 65) ;">
+      <h4 style="color:white ;" >Informacion Personal</h4>
+    </div>
+    <form action="/administrador/informacion/guardar" method="post"  class="row g-2" enctype="multipart/form-data">
+      <div class=" card-body">
+        <div class="container">
+          <button type="button" class="btn btn-info">Buscar</button>  
+          <button type="submit" class="btn btn-success">Guardar</button>
+          <button type="button" class="btn btn-warning">Editar</button>
+          <button type="button" class="btn btn-danger">Cancelar</button>
+        </div>
+        <hr>
+        <div class="container">
+          <div class="row">
+              <div class="col-md-3">
+                <label for="txttipodocumento" class="form-label">Tipo documento</label>
+                <select  type="text" class="form-select" name="txttipodocumento" id="txttipodocumento">
+                <option  selected disabled>Seleccione</option>
+                <option>Registro civil</option>
+                <option>Tarjeta de identidad</option>
+                <option>Cedula de ciudadania</option>
+                <option>Pasaporte</option>
+                </select>
+              </div>  
+            <div class="col-md-3">
+              <label for="txtid" class="form-label">Identificacion</label>
+              <input type="number" class="form-control" id="txtid" name="txtid" placeholder="Numero Id" required> 
+            </div>
+            <div class="col-md-3">
+              <label for="txtnombre" class="form-label">Nombres</label>
+              <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Nombres completo" required>
+            </div>
+            <div class="col-md-3">
+              <label for="txtapellido" class="form-label">Apellidos</label>
+              <input type="text" class="form-control" id="txtapellido" name="txtapellido" placeholder="Apellidos Completos" required>
+            </div>
+            <div class="col-md-3">
+              <label for="txttelefono" class="form-label">Numero de Celular</label>
+              <input type="number" class="form-control" id="txttelefono" name="txttelefono" placeholder="Telefono o Celular" required>
+            </div>
+            <div class="col-md-5">
+              <label for="txtdireccion" class="form-label">Dirección de Residencia</label>
+              <input type="text" class="form-control" id="txtdireccion" name="txtdireccion" placeholder="Cra xx-x # xx-xx " required> 
+            </div>
+            <div class="col-md-3">             
+              <label for="txteps" class="form-label">EPS</label>
+              <select type="text" class="form-select"  id="txteps" name="txteps" required>
+                <option selected disabled value="">Seleccione</option>
+                {% for eps in informacion %}
+                <option value=" {{eps[0]}} "> {{eps[0]}} </option>
+                {% endfor %}
+              </select>             
+            </div>
+            <div class="col-md-2">
+              <label for="txtgruposanguineo" class="form-label">Tipo de sandre</label>
+                <select type="text" class="form-select" id="txtgruposanguineo" name="txtgruposanguineo" required>
+                  <option selected disabled value="">Seleccione</option>
+                  <option>A+</option>
+                  <option>A-</option>
+                  <option>B+</option>
+                  <option>B-</option>
+                  <option>AB+</option>
+                  <option>AB-</option>
+                  <option>O+</option>
+                  <option>O-</option> 
+                </select>
+            </div>
+            <div class="col-md-4">
+              <label for="txtimagen" class="form-label">Seleccione una foto suya</label>
+              <input type="file" class="form-control" id="txtimagen" name="txtimagen" aria-label="file example" required>
+            </div>
+            <div class="col-md-3">
+              <label for="txtfechanacimiento" class="form-label">Fecha de Nacimiento</label>
+              <input type="date" class="form-control" id="txtfechanacimiento" name="txtfechanacimiento" placeholder="seleccione " required> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="card">
+    <div class="header" style="background-color:rgb(29, 50, 65) ;">
+      <h4 style="color: white;">Informacion clinica</h4>
+    </div>
+    <form action="/administrador/informacion/patologia" method="post">
+      <div class="card-body">
+        <p>Ingrese sus condiciones medicas.</p>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Agregar Condiciones medicas
+        </button>
+        <div class="row">
+          <div class="col">
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Ingrese su informacion vital</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="col">
+                      <label for="txtpatologia" class="form-label">Patologia</label>
+                      <input type="text" class="form-control" id="txtpatologia" name="txtpatologia" placeholder="Ingrese informacion"> 
+                    </div>
+                    <div class="col">
+                      <label for="txtobspatologias" class="form-label">Observaciones</label>
+                      <input type="text" class="form-control" id="txtobspatologias" name="txtobspatologias" placeholder="Ingrese informacion">
+                    </div>               
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Agregar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="card">
+      <table class="table table-striped">
+        <thead style="background-color: rgb(220, 220, 243);">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Patologias</th>
+            <th scope="col">Observaciones</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+          <tbody>  
+              <tr>                        
+              <th></th>
+              <td></td>
+              <td></td>
+              <td>
+                <form action="/administrador/informacion/borrarpatologia" method="post">
+                  <input value="" type="hidden" name="eliminarpatologia" id="eliminarpatologia">
+                  <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+              </td>
+            </tr>          
+          </tbody>
+      </table>
+    </div>  
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="card">
+    <div class="card-header" style="background-color:rgb(29, 50, 65) ;">
+      <h4 style="color: white;">Informacion asociada a alergias</h4>
+    </div>
+    <div class="card-body">
+      <p>A continuacion ingrese las alergias que presenta.</p>
+      <form action="/administrador/informacion/alergias" method="post" enctype="multipart/form-data">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#alergias">
+        Agregar alergias
+        </button>
+        <div class="row">
+          <div class="col">
+            <div class="modal fade" id="alergias" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Ingrese su alergias asocidas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="col">
+                      <label for="txtalergias" class="form-label">Alergia</label>
+                      <input type="text" class="form-control" id="txtalergias" name="txtalergias" placeholder="Ingrese informacion"> 
+                    </div>
+                    <div class="col">
+                      <label for="txtobsalergias" class="form-label">Observaciones</label>
+                      <input type="text" class="form-control" id="txtobsalergias" name="txtobsalergias" placeholder="Ingrese informacion">
+                    </div>               
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Agregar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="card">
+          <table class="table table-striped">
+            <thead style="background-color: rgb(220, 220, 243);">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Alergias</th>
+                <th scope="col">Observaciones</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>              
+              <tr>
+                <th></th>
+                <td></td>
+                <td></td>
+                <td>
+                  <form action="/administrador/informacion/borraralergia" method="post">
+                    <input value="" type="hidden" name="eliminaralergia" id="eliminaralergia">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                  </form>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="card">
+    <div class="card-header" style="background-color:rgb(29, 50, 65) ;">
+      <h4 style="color: white;">Informacion en caso de emergencia</h4>
+    </div>
+    <div class="card-body">
+      <p>A continuacion ingrese sus peticiones en caso de emergencia.</p>
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Agregar condiciones
+      </button>
+        <div class="row">
+          <div class="col">
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Ingrese su informacion vital</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="col">
+                      <label for="txtinformacionalergias1" class="form-label">Condiciones</label>
+                      <input type="text" class="form-control" id="txtinformacionalergias1" name="txtinformacionalergias1" placeholder="Ingrese informacion"> 
+                    </div>
+                    <div class="col">
+                      <label for="txtinformacionalergias2" class="form-label">Observaciones</label>
+                      <input type="text" class="form-control" id="txtinformacionalergias2" name="txtinformacionalergias2" placeholder="Ingrese informacion">
+                    </div>               
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Agregar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="card">
+          <table class="table table-striped">
+            <thead style="background-color: rgb(220, 220, 243);">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Condiciones</th>
+                <th scope="col">Observaciones</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>No intubar</td>
+                <td></td>
+                <td>
+                  <input name="editarinformacionclinica" id="editarinformacionclinica" class="btn btn-warning" type="button" value="Editar">
+                  <input name="editarinformacionclinica" id="editarinformacionclinica" class="btn btn-danger" type="button" value="Eliminar">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="card">
+    <div class="card-header" style="background-color:rgb(29, 50, 65) ;">
+      <h4 style="color: white;">Contactos de Emergencia</h4>
+    </div>
+    <div class="card-body">
+      <p>Agrege a las personas a contactar en caso de emergencia.</p>
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Agregar
+      </button>
+        <div class="row">
+          <div class="col">
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Ingrese su informacion vital</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="col-md-3">
+                      <label for="txtnombretercero" class="form-label">Nombres</label>
+                      <input type="text" class="form-control" id="txtnombretercero" name="txtnombretercero" placeholder="Nombres completo" required>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="apellidos" class="form-label">Apellidos</label>
+                      <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos Completos" required>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="txttelefono" class="form-label">Numero de Celular</label>
+                      <input type="number" class="form-control" id="txttelefono" name="txttelefono" placeholder="Telefono o Celular" required>
+                    </div>
+                    <div class="col-md-5">
+                      <label for="txtdireccion" class="form-label">Dirección de Residencia</label>
+                      <input type="text" class="form-control" id="txtdireccion" name="txtdireccion" placeholder="Cra xx-x # xx-xx " required> 
+                    </div>
+                    <div class="col-md-5">
+                      <label for="txtdireccion" class="form-label">Parentesco</label>
+                      <input type="text" class="form-control" id="txtdireccion" name="txtdireccion" placeholder="ingrese informacion" required> 
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Agregar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="card">
+          <table class="table table-striped">
+            <thead style="background-color: rgb(220, 220, 243);">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Celular</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Parentesco</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                 <td>Juan Camilo</td>
+                <td>Romero Doria</td>
+                <td>3023896158</td>
+                <td>Cra 15a # 28-35</td>
+                <td>Esposo</td>
+                <td>
+                  <input name="editarinformacionclinica" id="editarinformacionclinica" class="btn btn-warning" type="button" value="Editar">
+                  <input name="editarinformacionclinica" id="editarinformacionclinica" class="btn btn-danger" type="button" value="Eliminar">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'master/pie_master.html' %}
