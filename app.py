@@ -25,9 +25,23 @@ def inicio():
 def nosotros():
     return render_template('plantilla/nosotros.html')
 
+@app.route('/contacto')
+def contacto():
+    return render_template('plantilla/contacto.html')
+
 @app.route('/login')
 def admin_login():
-    return render_template('administrador/login.html')    
+    return render_template('plantilla/login.html')
+
+@app.route('/login', methods=['POST'])
+def admin_login_post():
+     
+     _usuario=request.form['txtusuario']
+     _password=request.form['txtcontraseña']
+
+     print(_usuario)
+     print(_password)
+     return render_template("administrador/index_admin.html")
 
 #-------------------------------------------------------#
 #----------------administrador--------------------------#
@@ -46,7 +60,10 @@ def admin_index():
     informacion=Cursor.fetchall()
     conexion.commit()
 
+
+
     print(informacion)
+   
 
     return render_template('administrador/index_admin.html', index_admin=informacion)
 
